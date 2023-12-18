@@ -9,37 +9,44 @@ import java.util.List;
 
 
 @Repository
-public class PatientRepoImpl implements PatientRepo{
+public class PatientRepoImpl implements PatientRepo {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
     @Override
-    public void insert(Patient p1){
-      jdbcTemplate.update("insert into petient(name,gender,age,disease) values(?,?,?,?)",p1.getName(),p1.getGender(),p1.getAge(),p1.getDisease());
+    public void insert(Patient p1) {
+        jdbcTemplate.update("insert into petient(name,gender,age,disease) values(?,?,?,?)", p1.getName(), p1.getGender(), p1.getAge(), p1.getDisease());
     }
 
     @Override
-    public Patient select(int id){
-        return jdbcTemplate.queryForObject("select * from petient where id=?",(rs, rowNum) -> {
-            return new Patient(rs.getInt("id"),rs.getString("name"),rs.getString("gender"),rs.getInt("age"),rs.getString("disease"));
-        },id);
+    public Patient select(int id) {
+        return jdbcTemplate.queryForObject("select * from petient where id=?", (rs, rowNum) -> {
+            return new Patient(rs.getInt("id"), rs.getString("name"), rs.getString("gender"), rs.getInt("age"), rs.getString("disease"));
+        }, id);
     }
 
+
     @Override
-    public Patient update(Patient p1){
-        jdbcTemplate.update("update petient set name=? , gender=?, age=?,disease=? where id=?",p1.getName(),p1.getGender(),p1.getAge(),p1.getDisease(),p1.getId());
+    public Patient update(Patient p1) {
+        jdbcTemplate.update("update petient set name=? , gender=?, age=?,disease=? where id=?", p1.getName(), p1.getGender(), p1.getAge(), p1.getDisease(), p1.getId());
         return p1;
     }
 
     @Override
-    public void delete(int id){
-       jdbcTemplate.update("delete from petient where id=?",id);
+    public void delete(int id) {
+        jdbcTemplate.update("delete from petient where id=?", id);
     }
 
     @Override
     public List<Patient> selectAll() {
-        return  jdbcTemplate.query("select * from  petient" ,(rs, rowNum) -> {
-           return new Patient(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5));
+        return jdbcTemplate.query("select * from  petient", (rs, rowNum) -> {
+            return new Patient(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
         });
+    }
+
+    @Override
+    public Patient getById(int id) {
+        return null;
     }
 }

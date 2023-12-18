@@ -37,5 +37,10 @@ public class PatientServiceImpl implements PatientService{
         return repo.selectAll();
     }
 
+    @Override
+    public Patient getById(int id) {
+        return repo.getById(id);
+    }
+
 
 }

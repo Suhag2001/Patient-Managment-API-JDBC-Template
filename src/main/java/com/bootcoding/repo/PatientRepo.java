@@ -14,4 +14,6 @@ public interface PatientRepo {
 
     void delete(int id);
     List<Patient> selectAll();
+
+    Patient getById(int id);
 }

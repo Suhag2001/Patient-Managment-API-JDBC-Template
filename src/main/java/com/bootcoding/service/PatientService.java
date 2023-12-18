@@ -12,4 +12,6 @@ public interface PatientService {
     Patient update(Patient p1);
     void delete(int id);
     List<Patient> selectAll();
+
+    Patient getById(int id);
 }
